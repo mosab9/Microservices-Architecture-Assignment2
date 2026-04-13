@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: prod
+  config:
+    import: "configserver:http://localhost:8088"

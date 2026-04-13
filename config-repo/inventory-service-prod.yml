@@ -1,0 +1,26 @@
+# Inventory Service Production Profile Configuration
+# This overrides base configuration when profile=prod is active
+
+spring:
+  # MySQL Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3307/inventory_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: inventoryuser
+    password: inventorypass
+
+  # JPA/Hibernate Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Production logging - less verbose
+logging:
+  level:
+    com.tus.inventoryservice: INFO
+    io.micrometer.tracing: WARN

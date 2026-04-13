@@ -1,0 +1,15 @@
+# API Gateway Production Profile Configuration
+# This overrides base configuration when profile=prod is active
+
+# Production logging - less verbose
+logging:
+  level:
+    com.tus.apigateway: INFO
+    io.micrometer.tracing: WARN
+    org.springframework.web: WARN
+
+# Production tracing - sample less
+management:
+  tracing:
+    sampling:
+      probability: 0.1  # Sample 10% of requests in production

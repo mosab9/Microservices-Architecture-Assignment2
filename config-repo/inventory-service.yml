@@ -1,0 +1,51 @@
+# Inventory Service Base Configuration
+# This file is loaded for all profiles
+
+server:
+  port: 8082
+
+# Gateway authentication
+gateway:
+  secret: my-gateway-secret-key-2026
+
+# Eureka Client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+
+# OpenAPI / Swagger Configuration
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+# Distributed Tracing with Zipkin
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      type: b3
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+# Logging with Trace IDs
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] %logger{36} - %msg%n"
+  level:
+    root: INFO
+    com.tus.inventoryservice: DEBUG
+    io.micrometer.tracing: DEBUG

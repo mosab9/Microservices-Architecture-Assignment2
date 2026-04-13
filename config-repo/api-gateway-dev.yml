@@ -1,0 +1,16 @@
+# API Gateway Development Profile Configuration
+# This overrides base configuration when profile=dev is active
+
+# Development logging - more verbose
+logging:
+  level:
+    com.tus.apigateway: DEBUG
+    io.micrometer.tracing: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+
+# Development tracing - sample all
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # Sample 100% of requests in development
